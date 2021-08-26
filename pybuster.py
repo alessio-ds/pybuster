@@ -1,14 +1,15 @@
 import requests
-from urllib3.util.retry import Retry
-from requests.adapters import HTTPAdapter
-s = requests.Session()
+#from urllib3.util.retry import Retry
+#from requests.adapters import HTTPAdapter
+#s = requests.Session()
 
 lista=[]
 def buster(url):
     global lista
-    retries=Retry(total=5,backoff_factor=0.1,status_forcelist=[ 500,502,503,504])
+    #retries=Retry(total=5,backoff_factor=0.1,status_forcelist=[ 500,502,503,504])
     try:
-        r=requests.get(url, max_retries=retries)
+        #r=requests.get(url, max_retries=retries)
+        r=requests.get(url)
         if str(r)=='<Response [404]>':
             pass
         elif str(r)=='<Response [403]>':
