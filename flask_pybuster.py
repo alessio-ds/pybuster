@@ -30,8 +30,11 @@ def data():
             wl=a['Field2_name']
             lista=(pb.sdir(url, wl))
             stringa=''
-            for e in range(len(lista)):
-                stringa+='<p>'+lista[e]+'</p><br>'
+            if lista==None:
+                pass
+            else:
+                for e in range(len(lista)):
+                    stringa+='<p>'+lista[e]+'</p><br>'
 
             lista=[]
             lista=(pb.sub(url, wl))
@@ -43,7 +46,12 @@ def data():
                     stringa+='<p>'+lista[e]+'</p><br>'
             with open('logs.txt', mode='w', encoding='UTF-8') as f:
                 f.write(stringa)
-            return stringa
+            if stringa=='':
+                return 'Nothing was found.<br><a href="/form"><em><font font color="#D2738A">Go Back</a> </font>'
+            else:
+                with open('logs.txt', mode='w', encoding='UTF-8') as f:
+                    f.write(stringa)
+                return stringa
         elif 'direct' in a:
             url=a['Field1_name']
             wl=a['Field2_name']
@@ -51,20 +59,29 @@ def data():
             stringa=''
             for e in range(len(lista)):
                 stringa+='<p>'+lista[e]+'</p><br>'
-            with open('logs.txt', mode='w', encoding='UTF-8') as f:
-                f.write(stringa)
-            return stringa
+            if stringa=='':
+                return 'Nothing was found.<br><a href="/form"><em><font font color="#D2738A">Go Back</a> </font>'
+            else:
+                with open('logs.txt', mode='w', encoding='UTF-8') as f:
+                    f.write(stringa)
+                return stringa
 
         elif 'subd' in a:
             url=a['Field1_name']
             wl=a['Field2_name']
-            lista=(pb.sub(url, wl))
             stringa=''
-            for e in range(len(lista)):
-                stringa+='<p>'+lista[e]+'</p><br>'
-            with open('logs.txt', mode='w', encoding='UTF-8') as f:
-                f.write(stringa)
-            return stringa
+            lista=(pb.sub(url, wl))
+            if lista==None:
+                pass
+            else:
+                for e in range(len(lista)):
+                    stringa+='<p>'+lista[e]+'</p><br>'
+            if stringa=='' or stringa==Null:
+                return 'Nothing was found.<br><a href="/form"><em><font font color="#D2738A">Go Back</a> </font>'
+            else:
+                with open('logs.txt', mode='w', encoding='UTF-8') as f:
+                    f.write(stringa)
+                return stringa
 
         elif 'direct' and 'subd' not in a:
             return 'You need to pick at least one of the two checkboxes.<br><a href="/form"><em><font font color="#D2738A">Go Back</a> </font>'
